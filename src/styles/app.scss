@@ -1,0 +1,31 @@
+.app-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: url('/assets/bg.png') no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    padding: 0 80px;
+    box-sizing: border-box;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        background: url('/assets/bg@2x.png') no-repeat;
+        background-size: cover;
+      }
+    .content {
+      display: flex;
+      justify-content: center;
+    }
+    .footer {
+      margin-bottom: 36px;
+    }
+}
+
+@media (max-width:768px) {
+  .app-wrapper {
+    height: auto;
+    display: block;
+    padding:0 20px;
+    overflow: hidden;
+  }
+}

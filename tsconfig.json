@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".", // 这将被解释为'root'目录
+    "paths": {
+      "@components/*": ["src/components/*"] // 这里定义了'@'别名，指向'src'目录
+    }
+    // 其他编译选项...
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

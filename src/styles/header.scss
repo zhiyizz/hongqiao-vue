@@ -1,0 +1,41 @@
+.header {
+    overflow: hidden;
+    display:flex;
+    .logo {
+        margin-top:49px;
+        width: 262px;
+        img {
+            width: 100%;
+        }
+    }
+    .sub-logo {
+        flex-grow:1;
+        text-align: center;
+        margin-top:39px;
+    }
+    .sub-logo {
+        display:none;
+    }
+    &.life {
+        .sub-logo {
+            display:block
+        }
+    }
+}
+
+
+@media (max-width:768px) {
+    .header {
+        display: flex;
+        text-align: center;
+        padding:20px 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .logo {
+            width:200px;
+            margin-top:20px;
+        }
+
+    }
+}
