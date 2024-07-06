@@ -1,4 +1,4 @@
-@import 'normalize.css';
+
 @import 'fonts/alibaba-font.scss';
 @import 'fonts/source.scss';
 
@@ -17,6 +17,10 @@ body {
   }
 }
 
+body {
+  font-family: AlibabaPuHuiTi, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Microsoft Yahei Light, Microsoft Yahei, sans-serif;;
+}
 video {
   display: block;
   width: 100%;
@@ -36,3 +40,4 @@ a {
       overflow-y:auto;
     }
 }
+

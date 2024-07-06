@@ -49,7 +49,7 @@ import { RouterLink } from 'vue-router';
                 
             </div>
         </div>
-        <Footer class="home" />
+        <Footer className="home" />
     </div>
 
 

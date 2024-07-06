@@ -5,6 +5,7 @@
         url:string
         url2x:string
     }
+    title?:string
     class: string
 }>()
 </script>
@@ -14,15 +15,12 @@
         <div class="logo">
             <img src="/assets/logo.png" alt="" srcset="/assets/logo@2x.png 2x" />
         </div>
-        <div class="title"></div>
-        <div class="sub-logo">
+        <div class="title" v-if="title"  :text="title">{{ title }}</div>
+        <div class="sub-logo" :class="title?``:`flex-grow` ">
             <img  :src="`/assets/` + logo?.url" alt="" :srcset="`/assets/`+ logo?.url2x + ` 2x`" />
         </div>
     </div>
 </template>
 
 
-<style scoped  lang="scss">
 
-   
-</style>

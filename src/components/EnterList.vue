@@ -1,26 +1,32 @@
 <script setup lang="ts">
-
-defineProps<{
+    import { RouterLink } from 'vue-router';
+type PropsType = {
     data: {
         url: string
         url2x: string
         title: string
         content: string
+        link:string
     }[]
     class: string
-}>()
+}
+defineProps<PropsType>()
 
 </script>
 
 <template>
 
     <ul class="enter-list" :class="class">
-        <li v-for="(item,index) in data" data-aos="fade-left"  :data-aos-duration="index * 500" :data-aos-delay="index * 150" >
-            <img :src="`/assets/` + item.url" alt="" class="bg" :srcset="`/assets/` + item.url2x">
-            <div class="text">
-                <p>{{ item.content }}</p>
-                <h3>{{ item.title }}</h3>
-            </div>
+        <li v-for="(item, index) in data" data-aos="fade-left" :data-aos-duration="index * 500"
+            :data-aos-delay="index * 150">
+            <RouterLink :to="{path:item.link}">
+                <img :src="`/assets/` + item.url" alt="" class="bg" :srcset="`/assets/` + item.url2x">
+                <div class="text">
+                    <p>{{ item.content }}</p>
+                    <h3>{{ item.title }}</h3>
+                </div>
+            </RouterLink>
+
         </li>
     </ul>
 </template>
@@ -36,13 +42,16 @@ defineProps<{
     gap: 0 40px;
 
     li {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-        position: relative;
-        writing-mode: vertical-lr;
-
+       
+        a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            writing-mode: vertical-lr;
+            width: 100%;
+        }
         .bg {
 
             width: 100%;
@@ -54,30 +63,34 @@ defineProps<{
             height: 100%;
             display: flex;
             flex-direction: column;
-            top:120px;
-            left:34px;
+            top: 120px;
+            left: 34px;
+
             h3,
             p {
                 position: relative;
                 margin: 0;
-                
+
             }
+
             p::before {
-                    content:"";
-                    width: 12px;
-                    height: 104px;
-                    background: #fff;
-                    display: inline-block;
-                    margin-bottom: 10px;
+                content: "";
+                width: 12px;
+                height: 104px;
+                background: #fff;
+                display: inline-block;
+                margin-bottom: 10px;
             }
+
             p {
                 font-family: AlibabaPuHuiTi-Light;
-                color:#fff;
+                color: #fff;
                 font-size: 22px;
                 font-weight: 300;
                 line-height: 20px;
                 letter-spacing: 0;
             }
+
             h3 {
                 font-family: SourceHanSerifCN-Heavy;
                 font-size: 72px;
