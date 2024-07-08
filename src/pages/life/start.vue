@@ -112,4 +112,35 @@ const logo = reactive({
   }
 
 }
+
+@media (max-width:768px) {
+  .start-wrap {
+    display: block;
+    padding:0 20px;
+    .links {
+      width: 100%;
+
+      display: block;
+      padding:0;
+
+      li {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding:20px 10px;
+        h3 {
+          font-size: 24px;
+        }
+        p {
+
+            word-break:break-all;
+            text-align: left;
+        }
+        .right {
+           font-size: 14px;
+        }
+      }
+    }
+  }
+}
 </style>

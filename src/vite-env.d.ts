@@ -8,3 +8,4 @@ declare module "*.vue" {
 
 declare module 'aos'
 declare module 'swiper/modules'
+declare module '*.ts'

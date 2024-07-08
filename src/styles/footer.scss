@@ -3,11 +3,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     .wx-home {
         width: 456px;
         height: 157px;
         border: 3px solid rgba(250, 218, 157, .3);
-      
+
         grid: 160px / auto-flow;
         display: none;
         .ewm,
@@ -32,6 +33,7 @@
             
         }
     }
+
     .btn-home,.goBack {
         width: 284px;
         height: 98px;
@@ -40,6 +42,7 @@
         color:#fff;
         background: url("/assets/btn.png") no-repeat 100%;
         display: none;
+        font-size: 36px;
         a {
             display: flex;
             align-items: center;
@@ -53,32 +56,42 @@
         img {
         margin-right: 10px;
         }
+
+    }
+    .btn-home {
+      display: block;
+      order: 1;
+    }
+    .goBack {
+      order: 3;
     }
 
-    &.life {
+    &.life,&.people,&.rule {
         justify-content: center;
-        font-size: 36px;
+
     }
 
-    &.life {
+    &.home {
         .btn-home {
-            display: block;
+            display: none;
         }
     }
     &.between  {
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       .goBack {
         display: flex;
         align-items: center;
         justify-content: center;
         color:#fff;
         cursor: pointer;
+
       }
 
     }
     .educate {
+      order: 2;
       width: 940px;
       height: 190px;
       background: rgba(137,93,25,0.5);
@@ -111,6 +124,10 @@
           line-height: 12px;
           line-height: 56px;
           margin:0 auto;
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            background: url('/assets/life/href@2x.png') no-repeat;
+            background-size: cover;
+          }
           img {
             display: inline-block;
             vertical-align: middle;
@@ -136,31 +153,105 @@
         }
       }
     }
+    .rule_search {
+      display: flex;
+
+      .link {
+        width: 530px;
+        height: 160px;
+        display: flex;
+        background: #D6993A;
+        margin:0 20px;
+        align-items: center;
+        justify-content: space-around;
+        p {
+          font-size: 36px;
+          color: #FFFFFF;
+          line-height: 48px;
+        }
+        a {
+          display: block;
+          width: 180px;
+          height: 70px;
+          line-height:70px;
+          background: rgba(0,0,0,0.2);
+          border-radius: 35px;
+          border: 1px solid #FFFFFF;
+          font-size: 24px;
+          color: #FFFFFF;
+          text-align: center;
+          img {
+            vertical-align: middle;
+            margin-right: 10px;;
+          }
+        }
+        &.red {
+          background: #B24855;
+        }
+      }
+    }
+    .rule_three {
+      .rule-btn {
+        width: 280px;
+        height: 94px;
+        line-height: 94px;
+        text-align: center;
+        background: url("/assets/btn.png") no-repeat 100%;
+        display: inline-block;
+        font-size: 36px;
+        color: #FFFFFF;
+        margin:0 30px;
+      }
+    }
 }
 
 @media (max-width:768px) {
     .footer {
-        .wx-home {
-            width: 100%;
-            height: 50px;
-            grid: 80px / auto-flow;
+      order:1;
+      padding:20px 20px 0;
+      display: block;
+  
+      &.home {
+          .wx-home {
+            display: none;
+          }
+      }
 
-            .ewm {
-                width: 80px;
-            }
-            .text {
-                img {
-                    width: 70%;
-                }
-            }
+
+        .btn-home,.goBack {
+            width: 280px * 0.5;
+            height: 94px  * 0.5;
+            line-height: 94px  * 0.5;
+            
+            font-size: 16px;
+            img {width: 20%;}
         }
         .btn-home {
-            width: 280px * 0.6;
-            height: 94px  * 0.6;
-            line-height: 94px  * 0.6;
-            
-            font-size: 22px;
-            img {width: 20%;}
+          float: left;
+        }
+        .goBack {
+          float: right;
+        }
+
+        .educate {
+          width: 100%;
+          height: auto;
+          padding:10px 0;
+          display: block;
+          margin-top:80px;
+          padding:10px;
+          box-sizing: border-box;
+          .link {
+            width: 100%;
+            height: auto;
+            margin:0 0 10px 0;
+          }
+          .wx {
+            .ewm {
+              width: 100px;
+              height: 100px;
+            }
+          }
         }
     }
     

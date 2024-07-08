@@ -35,13 +35,39 @@
             background-size: 100% 100%;
             text-align: center;
             @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-              background: url('/assets/bg@2x.png') no-repeat;
+              background: url('/assets/btn@2x.png') no-repeat;
               background-size: 100% 100%;
             }
           }
         }
       }
 
+    }
+
+    @media  (max-width:768px) {
+        .tab-view {
+
+          .tab-head {
+
+            ul {
+              font-size: 16px;
+              overflow-x: auto;
+              width: 100%;
+              white-space: nowrap;
+              display: block;
+              padding:0;
+              li {
+                width: 120px;
+                height: 40px;
+                line-height: 40px;
+                display: inline-block;
+                margin:0 5px;
+                font-size: 16px;
+       
+              }
+            }
+          }
+        }
     }
     
 </style>

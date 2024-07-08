@@ -29,6 +29,7 @@
             left:50%;
             transform: translateX(-50%);
             top:-3px;
+            width:100%;
         }
         &::before {
             content: attr(text);
@@ -38,6 +39,7 @@
             left:50%;
             transform: translateX(-50%);
             top:-5px; 
+            width:100%;
         }
     }
     .sub-logo {
@@ -50,7 +52,7 @@
     .sub-logo {
         display:none;
     }
-    &.life {
+    &.life,&.people,&.rule {
         .sub-logo {
             display:block
 
@@ -62,16 +64,30 @@
 
 @media (max-width:768px) {
     .header {
+        order:2;
         display: flex;
         text-align: center;
         padding:20px 0;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        .title {
+          font-size: 40px;
+        }
+        &.people_process,&.people_site,&.people_message {
+          .title {
+            font-size: 28px;
+          }
+        }
         .logo {
             width:200px;
             margin-top:20px;
         }
-
+        .sub-logo {
+          width: 200px;
+          img {
+            width: 100%;
+          }
+        }
     }
 }

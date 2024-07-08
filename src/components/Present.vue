@@ -27,4 +27,15 @@ import Copy from './Copy.vue';
   align-items: center;
 
 }
+
+@media (max-width:768px) {
+  .tab-body {
+    padding:0 20px;
+    display:block;
+    margin-top:20px;
+    :deep(.list){
+      padding:0;
+    }
+  }
+}
 </style>

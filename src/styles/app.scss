@@ -1,17 +1,14 @@
 .app-wrapper {
     width: 100vw;
     height: 100vh;
-    background: url('/assets/bg.png') no-repeat;
+  
     background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     padding: 0 80px;
     box-sizing: border-box;
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-        background: url('/assets/bg@2x.png') no-repeat;
-        background-size: cover;
-      }
+
     .content {
       display: flex;
       justify-content: center;
@@ -23,10 +20,21 @@
 
 
 @media (max-width:768px) {
+  // #app {
+  //   min-height: 100vh;
+  // }
   .app-wrapper {
     height: auto;
-    display: block;
-    padding:0 20px;
+
+    padding:0;
     overflow: hidden;
+    .content {
+      order:3;
+      display: block;
+    }
+    .footer {
+      order:1;
+      margin:0;
+    }
   }
 }

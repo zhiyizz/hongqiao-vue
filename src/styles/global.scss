@@ -30,14 +30,29 @@ html {
   &.smooth-scroll {
     scroll-behavior: smooth;
   }
+  
 }
 a {
   text-decoration: none;
 }
+body {
+  background: url('/assets/bg.png') no-repeat;
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background: url('/assets/bg@2x.png') no-repeat;
+    background-size: cover;
+  }
+
+}
 
 @media (max-width:768px) {
     html,body {
+      height: auto;
+      min-height: 100vh;
       overflow-y:auto;
+    }
+
+    #app {
+      min-height: 100vh;
     }
 }
 

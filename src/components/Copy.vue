@@ -38,7 +38,7 @@ defineProps<{
 
     @media (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi) {
-      background: url('/assets/arrow_top@2x.png') no-repeat;
+      background: url('/assets/life/arrow_top@2x.png') no-repeat;
       background-size: cover;
     }
   }
@@ -72,6 +72,25 @@ defineProps<{
     width: 720px;
     height: 540px;
     margin:0;
+  }
+}
+
+@media (max-width:768px){
+  .copy {
+    width: 100%;
+    height: auto;
+    margin:0 0 20px;
+
+    h3 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+    }
+    &.big {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
