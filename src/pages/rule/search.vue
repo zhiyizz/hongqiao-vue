@@ -34,6 +34,7 @@ const logo = reactive({
       list-style:none;
       display: flex;
       flex-wrap: wrap;
+      padding:0;
       li {
         width: 300px;
         background: #FFFFFF;
@@ -41,6 +42,7 @@ const logo = reactive({
         box-sizing: border-box;
         background:#fff;
         margin:10px;
+       
         .pic {
           background: #fff;
           height: 300px;
@@ -50,6 +52,19 @@ const logo = reactive({
           color: #333333;
           line-height: 31px;
           text-align: center;
+        }
+      }
+    }
+  }
+  @media (max-width:768px) {
+    .search{
+      padding:0 20px;
+      ul {
+        display:block;
+        li {
+          width:100%;
+          margin:10px 0;
+
         }
       }
     }

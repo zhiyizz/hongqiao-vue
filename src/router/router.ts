@@ -22,6 +22,7 @@ import RuleTen from '@pages/rule/ten.vue';
 import RuleCommunity from '@pages/rule/community.vue';
 import RuleThree from '@pages/rule/three.vue';
 import RuleTheater from '@pages/rule/theater.vue';
+import RuleTour from '@pages/rule/tour.vue';
 
 
 
@@ -45,6 +46,7 @@ const routes = [
   { path: '/rule_community', component: RuleCommunity,meta:{back:true} },
   { path: '/rule_three', component: RuleThree,meta:{back:true} },
   { path: '/rule_theater', component: RuleTheater,meta:{back:true} },
+  { path: '/rule_tour', component: RuleTour,meta:{back:true} },
 ]
 
 const router = createRouter({

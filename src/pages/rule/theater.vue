@@ -51,4 +51,20 @@ const logo = reactive({
           }
         }
     }
+    @media (max-width:768px) {
+    .video-list {
+      display:block;
+      width: 100%;
+      ul {
+        display: block;
+        padding:0 20px;
+        li {
+          width: 100%;
+          margin-bottom: 20px;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    }
 </style>
