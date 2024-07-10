@@ -1,34 +1,40 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
 
 import Layout from '@components/Layout.vue';
+import { getCommon } from '@api/index.ts';
 const logo = reactive({
     url: "people/logo.png",
     url2x: "people/logo@2x.png"
 })
+const dataArr = ref()
+const loading = ref(true)
 
+
+const  loadData = async() => {
+  loading.value = true;
+  const {data} = await getCommon({type:1})
+  dataArr.value =  data;
+  loading.value = false;
+}
+loadData()
 
 </script>
 
 <template>
+  {{ console.log(dataArr) }}
   <Layout class="people" title="金点子结金果子"  :logo="logo">
       <div class="mapTree">
         <div class="ewm">
             <div class="pic"></div>
             <p>请打开随申办APP扫描上方二维码向虹桥街道提出意见建议</p>
         </div>
-          <div class="pos">
+          <div class="pos loading" v-loading="loading">
             <img src="/assets/people/tree.png" class="bg" srcset="/assets/people/tree@2x.png 2x" alt=""/> 
             <div class="map">
-              <span class="m1 w200"></span>
-              <span class="m2 w150"></span>
-              <span class="m3 w200"></span>
-              <span class="m4 w200"></span>
-              <span class="m5 w200"></span>
-              <span class="m6 w150"></span>
-              <span class="m7 w150"></span>
-              <span class="m8 w280"></span>
-              <span class="m9 w200"></span>
+              <span v-for="(item) in dataArr">
+                <img :src="item.resource" alt="" />
+              </span>
             </div>
           </div>
       </div>
@@ -95,39 +101,57 @@ const logo = reactive({
             width: 280px;
             height: 280px;
           }
-          &.m1 {
+          &:nth-child(1) {
+            width: 200px;
+            height: 200px;
             left:0;
             top:175px;
           }
-          &.m2 {
+          &:nth-child(2) {
             left:100px;
             top:448px;
+            width: 150px;
+            height: 150px;
           }
-          &.m3 {
+          &:nth-child(3) {
+            width: 200px;
+            height: 200px;
             left:245px;
             top:248px;
           }
-          &.m4 {
+          &:nth-child(4) {
+            width: 200px;
+            height: 200px;
             left:345px;
             top:33px;
           }
-          &.m5 {
+          &:nth-child(5) {
+            width: 200px;
+            height: 200px;
             left:470px;
             top:329px;
           }
-          &.m6 {
+          &:nth-child(6) {
+            width: 150px;
+            height: 150px;
             left:570px;
             top:12px;
           }
-          &.m7 {
+          &:nth-child(7)  {
             left:645px;
             top:179px;
+            width: 150px;
+            height: 150px;
           }
-          &.m8 {
+          &:nth-child(8) {
             left:803px;
             top:73px;
+            width: 280px;
+            height: 280px;
           }
-          &.m9 {
+          &:nth-child(9) {
+            width: 200px;
+            height: 200px;
             left:1056px;
             top:349px;
           }

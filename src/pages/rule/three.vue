@@ -1,35 +1,87 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive,ref,toRaw } from 'vue'
 import Layout from '@components/Layout.vue';
+import { getThree } from '@api/index.ts';
 const logo = reactive({
   url: "rule/logo.png",
   url2x: "rule/logo@2x.png"
 })
+const dataArr = ref() 
+const loading = ref(true)
+
+interface User {  
+  real_name: string, //姓名
+  org: string, //单位
+  phone: string, //电话号码
+  type: string //身份类型 1:民警, 2:调解员, 3:律师
+} 
+  
+// 定义二级数组对象的类型  
+interface GroupedUsers {  
+  [type: string]: User[];  
+}  
+  
+// 或者，如果你想要一个真正的数组，其中每个元素都是一个对象，可以这样做：  
+// type GroupedUsersArray = Array<{ role: string; users: User[] }>;  
+  
+
+
+const  loadData = async() => {
+  loading.value = true;
+  const { data } = await getThree({})
+
+  const users: User[] = data;  
+  
+// 使用reduce来归类用户  
+const groupedByType: GroupedUsers = users.reduce((acc, user) => {  
+  if (!acc[user.type]) {  
+    acc[user.type] = [];  
+  }  
+  acc[user.type].push(user);  
+  return acc;  
+}, {} as GroupedUsers);  
+  
+// 如果你想要一个真正的二级数组对象数组（尽管这不太常见），可以这样做：  
+const groupedByTypeAsArray: Array<{ type: string; users: User[] }> = Object.keys(groupedByType).map(type => ({  
+  type,  
+  users: groupedByType[type]  
+}));  
+  
+  dataArr.value = groupedByTypeAsArray  
+
+  loading.value = false;
+}
+loadData()
 
 </script>
 
 <template>
   <Layout class="rule" title="十分钟法律服务圈" :logo="logo">
-    <div class="three">
-      <div class="item">
-        <span class="logo">
+    <div class="three loading" v-loading="loading"  >
+      <div class="item" v-for="item in dataArr">
+        <span class="logo" v-if="item.type === '1'">
           <img src="/assets/rule/mj.png" srcset="/assets/rule/mj@2x.png 2x" alt="" />
           <h4>民警</h4>
+        </span>
+        <span class="logo"  v-else-if="item.type === '2'">
+          <img src="/assets/rule/tjy.png" srcset="/assets/rule/tjy@2x.png 2x" alt="" />
+          <h4>调解员</h4>
+        </span>
+        <span class="logo"  v-else-if="item.type === '3'">
+          <img src="/assets/rule/ls.png" srcset="/assets/rule/ls@2x.png 2x" alt="" />
+          <h4>律师</h4>
         </span>
         <el-scrollbar class="scrollbar-box">
           <div class="scrollbar-item">
             <div class="names">
               <ul>
-                <li>
-                  <h3>许孝安</h3>
-                  <p>单位：虹桥路派出所</p>
-                  <p>联系方式：23030310</p>
+               
+                <li v-for="item2 in item.users">
+                  <h3>{{item2.real_name}}</h3>
+                  <p>单位：{{item2.org}}</p>
+                  <p>联系方式：{{item2.phone}}</p>
                 </li>
-                <li>
-                  <h3>王倩</h3>
-                  <p>单位：新虹桥治安派出所</p>
-                  <p>联系方式：23030510</p>
-                </li>
+
               </ul>
             </div>
             <div class="copy">
@@ -43,7 +95,7 @@ const logo = reactive({
         </el-scrollbar>
 
       </div>
-      <div class="item">
+      <!-- <div class="item">
         <span class="logo">
           <img src="/assets/rule/tjy.png" srcset="/assets/rule/tjy@2x.png 2x" alt="" />
           <h4>调解员</h4>
@@ -69,7 +121,8 @@ const logo = reactive({
               <p>1、主持调解工作，讲解有关法律法规和国家政策，在当事人平
                 等协商、互谅互让的基础上提出解决方案，帮助当事人达成调解协议;<br />
                 2、做好受理登记、报表统计、文书制作、信息维护、整理归档等工作;<br />
-                3、提请公安派出所、司法所将相关矛盾纠纷流转至居委、平安办或相关职能部门;4、引导纠纷当事人向人民法院申请司法确认</p>
+                3、提请公安派出所、司法所将相关矛盾纠纷流转至居委、平安办或相关职能部门;<br />
+                4、引导纠纷当事人向人民法院申请司法确认</p>
             </div>
           </div>
         </el-scrollbar>
@@ -114,7 +167,7 @@ const logo = reactive({
             </div>
           </div>
         </el-scrollbar>
-      </div>
+      </div> -->
     </div>
   </Layout>
 
@@ -123,7 +176,7 @@ const logo = reactive({
 <style lang="scss" scoped>
 .three {
   display: flex;
-
+  justify-content: center;
   .item {
     width: 500px;
     height: 620px;
@@ -216,10 +269,12 @@ const logo = reactive({
     display: block;
     padding:0 20px;
     margin-top:50px;
+    box-sizing: border-box;
     .item {
       width: 100%;
       height: 700px;
       margin:0 0 80px;
+
       .scrollbar-box {
         margin:80px 0 20px;
         height: calc(100% - 100px);

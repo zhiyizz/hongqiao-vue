@@ -24,7 +24,7 @@ const loading = computed(()=>{
         <li v-for="(item) in tab"  @click="onClick(item)" class="btn">{{ item }}</li>
       </ul>
     </div>
-    {{ console.log('loading',loading) }}
+
     <div v-loading="loading" class="loading">
       <Present :data="data" />
     </div>

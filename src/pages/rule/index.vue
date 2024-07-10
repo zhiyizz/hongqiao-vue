@@ -30,7 +30,7 @@ const list = reactive([
         content: "Community legal education platform",
         url: "rule/list4.png",
         url2x: "rule/list4@2x.png",
-        link:"/people_community"
+        link:"/rule_community"
     },{
         title: "法律服务一键查",
         content: "One click search for legal services",

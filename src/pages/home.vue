@@ -3,13 +3,8 @@
 import Header from '@components/Header.vue';
 import Footer from '@components/Footer.vue';
 import { RouterLink } from 'vue-router';
-import {onMounted} from 'vue';
 import { isMobileDevice } from '../utils/help';
-import AOS from 'aos';
-onMounted(() => {
-  
-  AOS.init({offset:100,duration:600,delay:100,});
-})
+
 
 </script>
 

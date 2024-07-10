@@ -2,7 +2,6 @@
 import SwiperList from './SwiperList.vue';
 import Copy from './Copy.vue';
 import type { WhhdType } from '@utils/type/global.ts'
-import { ref,getCurrentInstance } from 'vue';
 
 const props = defineProps<{
     data:typeof WhhdType
@@ -13,9 +12,9 @@ const props = defineProps<{
 
 
 <template>
-
+  {{ console.log(props.data) }}
   <div class="tab-body">
-    <Copy :title="props.data.page_content.cate_name" :content="props.data.page_content.detail" />
+    <Copy :title="props.data?.page_content?.cate_name??''" :content="props.data.page_content?.detail??''" />
     <div class="pic">
       <SwiperList :data="props.data.detail" class="small" />
     </div>

@@ -12,7 +12,7 @@ defineProps<{
   // }
 </script>
 <template>
-  {{ console.log($route) }}
+
     <div class="footer" :class="[{ between: $route.meta.back}, className]">
         <div class="wx-home"  >
             <div class="ewm">
@@ -35,14 +35,15 @@ defineProps<{
         <div class="educate" v-if="$route.meta.educate">
             <div class="link">
              <h5>2024年春季课程招生</h5>
-              <a href=""><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+              <a href="https://mp.weixin.qq.com/s/e7_yz2TYm7y48Kg6VP9_aQ"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             </div>
             <div class="link">
              <h5>2024年寒假课程招生</h5>
-              <a href=""><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+              <a href="https://mp.weixin.qq.com/s/_w1qY0gvaecvFqisySoHHA"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             </div>
             <div class="wx">
               <div class="ewm">
+                <img src="/assets/life/ewm.jpg" alt="">
               </div>
               <p>未来更多服务，请扫 码关注古北市民中心 官方公众号</p>
             </div>
@@ -51,11 +52,11 @@ defineProps<{
         <div class="rule_search" v-if="$route.path === '/rule_search'">
             <div class="link yellow">
                <p>国际社区法律<br />事务指引电子书</p>
-               <a href=""><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+               <a href="https://book.yunzhan365.com/ermcp/xmgr/mobile/index.html"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             </div>
             <div class="link red">
                <p>国际社区法律<br />事务指引电子书</p>
-               <a href=""><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+               <a href="https://book.yunzhan365.com/ermcp/ybco/mobile/index.html"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             </div>
         </div>
 

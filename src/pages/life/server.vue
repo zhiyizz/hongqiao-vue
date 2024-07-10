@@ -9,15 +9,15 @@ const logo = reactive({
     url2x: "life/logo@2x.png"
 })
 
-const dataArr = ref([])
+const dataArr = ref()
 const loading = ref(true)
-const  loadUser = async() => {
+const  loadData = async() => {
   loading.value = true;
   const {data} = await getWlfw({})
   dataArr.value =  data;
   loading.value = false;
 }
-loadUser()
+loadData()
 
 </script>
 

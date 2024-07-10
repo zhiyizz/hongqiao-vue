@@ -47,6 +47,13 @@ defineProps<PropsType>()
   li {
     position: relative;
     width: 360px;
+    &:nth-child(odd) {
+      animation: 3s linear 4s infinite alternate up;
+    }
+
+    &:nth-child(even) {
+      animation: 3s linear 3s infinite alternate up;
+    }
 
     a {
       display: flex;
@@ -148,6 +155,24 @@ defineProps<PropsType>()
       width: 460px;
       height: 600px;
     }
+  }
+}
+
+@keyframes up {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  60% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-10px);
   }
 }
 

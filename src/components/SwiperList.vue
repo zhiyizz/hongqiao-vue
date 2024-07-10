@@ -8,10 +8,12 @@ import { isMobileDevice } from '@utils/help.ts';
 import type { SwiperType } from '@utils/type/global.ts'
 import { ref } from 'vue'
 
+const centerDialogVisible = ref()
 const modules = [Autoplay, EffectCoverflow]
 
 const type = ref(false)
 
+const activeIndex = ref(0)
 const onShow = () => {
   type.value = true;
 }
@@ -26,51 +28,76 @@ defineProps<{
   data:typeof SwiperType
 }>()
 
+const onSlideChange = (e: { activeIndex: number }) => {
+    console.log(e)
+    activeIndex.value = e.activeIndex
+  }
 </script>
 
 
 <template>
 
-  <swiper  v-if="!isMobileDevice()" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" slidesPerView="auto"
-     :coverflowEffect="{
+  <swiper v-if="!isMobileDevice()" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
+    :slidesPerView="'auto'" :coverflowEffect="{
       rotate: 20,
       stretch: 0,
       depth: 100,
       modifier: 2,
       slideShadows: true,
-    }" :pagination="true" :modules="modules" class="mySwiper" :class="class">
+    }" :pagination="true" :modules="modules" class="mySwiper" :class="class" @slideChange="onSlideChange">
     <swiper-slide v-for="(item, index) in data">
       <div class="pic">
-        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" 
-          preview-teleported="true" :preview-src-list="[item.resource]"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow" v-if="item.zcjd_flag === 1">
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :preview-teleported="true"
+          :preview-src-list="[item.resource]" :initial-index="1" fit="cover" />
+        <div class="btn" @click="centerDialogVisible = true" v-if="item.zcjd_flag === 1 && activeIndex === index">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
       <h3>{{ item.title }}</h3>
+      
+      <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
+        append-to-body>
+        <div class="main" v-html="item.zcjd_content"></div>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
+ 
+          </div>
+        </template>
+      </el-dialog>
+
     </swiper-slide>
-  
+
 
   </swiper>
 
-  <ul class="list" v-if="isMobileDevice()" >
+  <ul class="list" v-if="isMobileDevice()">
     <li v-for="(item, index) in data">
-         <div class="pic">
-        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['item.resource']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow" v-if="item.zcjd_flag === 1">
+      <div class="pic">
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :preview-teleported="true"
+          :preview-src-list="[item.resource]" :initial-index="1" fit="cover" />
+        <div class="btn" @click="centerDialogVisible = true" v-if="item.zcjd_flag === 1 && activeIndex === index">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
       <h3>{{ item.title }}</h3>
+      
+      <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
+        append-to-body>
+        <div class="main" v-html="item.zcjd_content"></div>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
+ 
+          </div>
+        </template>
+      </el-dialog>
     </li>
-         
+
   </ul>
   <Policy v-if="type" @back="onHide" />
 </template>
@@ -79,6 +106,39 @@ defineProps<{
 :deep(.swiper-slide-shadow-coverflow) {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
+
+:deep(.el-dialog) {
+    padding:40px  60px !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+    border-radius: 20px !important;
+    border: 4px solid #FBDB9E !important;
+}
+.main {
+    text-align: left;
+    h3 {
+      text-align: center;
+      font-family: SourceHanSerifCN-Bold;
+      font-weight: bold;
+      font-size: 40px;
+      color: #333333;
+      margin: 0;
+
+    }
+  }
+  .close {
+      width: 180px;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      font-size: 30px;
+      color: #FFFFFF;
+      margin:0 auto;
+      cursor: pointer;
+      border:0;
+      
+  }
+
 
 .mySwiper {
   width: 1200px;
@@ -137,6 +197,7 @@ defineProps<{
         img {
           width: auto;
         }
+       
       }
 
       .el-image {
@@ -229,6 +290,21 @@ defineProps<{
       width: auto;
     }
   }
+  .close {
+      width: 100px;
+      height:40px;
+      line-height: 40px;
+      text-align: center;
+    
+      font-size: 18px;
+      color: #FFFFFF;
+      margin:0 auto;
+      cursor: pointer;
+      border:0;
 
+  }
 }
+    
+
+
 </style>

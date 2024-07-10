@@ -7,7 +7,7 @@
         url2x:string
     }
     title?:string
-    class: string
+    class?: string
 }>()
 </script>
 

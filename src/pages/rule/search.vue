@@ -1,23 +1,38 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
 
 import Layout from '@components/Layout.vue';
+import { getCommon } from '@api/index.ts';
 const logo = reactive({
     url: "rule/logo.png",
     url2x: "rule/logo@2x.png"
 })
 
+const dataArr = ref()
+const loading = ref(true)
+
+
+const  loadData = async() => {
+  loading.value = true;
+  const {data} = await getCommon({type:5})
+  dataArr.value =  data;
+  loading.value = false;
+}
+loadData()
+
 
 </script>
 
 <template>
-  <Layout class="rule" title="法律服务一键查"  :logo="logo">
-      <div class="search">
-         <ul>
 
-            <li v-for="item in [1,2,3,4,5]">
-              <div class="pic"></div>
-              <p>二维码名称</p>
+  <Layout class="rule" title="法律服务一键查"  :logo="logo">
+      <div class="search" >
+         <ul  v-loading="loading" class="loading">
+            <li v-for="item in dataArr">
+              <div class="pic">
+                <img :src="item.resource" alt="" />
+              </div>
+              <p>{{item.title}}</p>
             </li>
             
          </ul>
