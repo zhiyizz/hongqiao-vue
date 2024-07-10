@@ -9,8 +9,11 @@ defineProps<{
 
 <template>
   <div class="copy" :class="className">
-    <h3>{{ title }}</h3>
-    <p>{{ content }}</p>
+    <el-scrollbar>
+      <h3>{{ title }}</h3>
+      <p>{{ content }}</p>
+  </el-scrollbar>
+    
   </div>
 </template>
 

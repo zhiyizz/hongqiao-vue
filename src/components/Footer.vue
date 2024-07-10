@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import 'normalize.css/normalize.css'
 import "@styles/footer.scss";
-import { RouterLink } from 'vue-router';
+import { RouterLink,useRouter } from 'vue-router';
 
 defineProps<{
     className:string
 }>()
-
-  const onBack = () => {
-    history.back();
-  }
+  // const router  = useRouter()
+  // const onBack = () => {
+  //   router.back()
+  // }
 </script>
 <template>
   {{ console.log($route) }}
     <div class="footer" :class="[{ between: $route.meta.back}, className]">
         <div class="wx-home"  >
             <div class="ewm">
-
+              <img src="/assets/home-ewm.png" alt="">
             </div>
             <div class="text">
                 <img src="/assets/home/footer_text.png" srcset="/assets/home/footer_text@2x.png 2x" alt="">
@@ -29,7 +29,7 @@ defineProps<{
                 返回首页
             </RouterLink>
         </div>
-        <div class="goBack" @click="onBack"><img src="/assets/back.png" srcset="/assets/back@2x.png 2x" alt="">返回上一级</div>
+        <div class="goBack" @click="()=>$router.back()"><img src="/assets/back.png" srcset="/assets/back@2x.png 2x" alt="">返回上一级</div>
     
        
         <div class="educate" v-if="$route.meta.educate">

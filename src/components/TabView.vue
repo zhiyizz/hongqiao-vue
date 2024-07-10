@@ -1,18 +1,34 @@
 <script  lang="ts" setup>
-  import Present from './Present.vue';
+  import { ref,computed } from 'vue';
+import Present from './Present.vue';
+  import type { WhhdType } from '@utils/type/global.ts'
+  const props = defineProps<{
+    tab:string[],
+    data:typeof WhhdType
+}>()
+
+const emit = defineEmits(['back']);
+const onClick = (val:string) => {
+  emit('back',val)
+}
+
+const loading = computed(()=>{
+  return !props.data.detail
+})
 </script>
 
 <template>
   <div class="tab-view">
     <div class="tab-head">
       <ul>
-        <li class="btn">华夏云</li>
-        <li>记忆虹桥</li>
-        <li>融情四季</li>
-        <li>我们的节日</li>
+        <li v-for="(item) in tab"  @click="onClick(item)" class="btn">{{ item }}</li>
       </ul>
     </div>
-      <Present />
+    {{ console.log('loading',loading) }}
+    <div v-loading="loading" class="loading">
+      <Present :data="data" />
+    </div>
+      
   </div>
 </template>
 
@@ -26,6 +42,7 @@
           display: flex;
           font-size: 36px;
           color: #FFFFFF; 
+          justify-content: center;
           li {
             margin:0 50px;
             width:240px;

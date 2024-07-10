@@ -23,11 +23,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+ 
       "@components": resolve('src/components'), // 路径别名
       "@styles": resolve( 'src/styles'), // 路径别名
       "@assets": resolve('src/assets'), // 路径别名
       "@pages": resolve('src/pages'), // 路径别名
       "@utils": resolve('src/utils'), // 路径别名
+      "@axios": resolve('src/axios'), // 路径别名
+      "@api": resolve('src/api'), // 路径别名
     },
     
   },
@@ -37,7 +40,18 @@ export default defineConfig({
         additionalData: `@import "@styles/utils.scss";`
       }
     }
-  }
+  },
+  // server: {
+  //   proxy: {
+  //     '/net': {
+  //       target: 'http://api.gbhqsf.com/admin/getdata',
+  //       changeOrigin: true,
+  //       // rewrite: path => ''
+  //       rewrite: path => path.replace(/^\/net/, '')
+  //     }
+  //   },
+  //   host: '0.0.0.0'
+  // },
 
 
 })

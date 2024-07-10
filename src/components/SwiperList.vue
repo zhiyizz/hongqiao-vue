@@ -5,6 +5,7 @@ import Policy from './Policy.vue'
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import { isMobileDevice } from '@utils/help.ts';
+import type { SwiperType } from '@utils/type/global.ts'
 import { ref } from 'vue'
 
 const modules = [Autoplay, EffectCoverflow]
@@ -18,119 +19,58 @@ const onHide = (val: boolean) => {
   type.value = val;
 }
 
+
+
 defineProps<{
   class?: string
+  data:typeof SwiperType
 }>()
 
 </script>
 
 
 <template>
-  <swiper v-if="!isMobileDevice()" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" :slidesPerView="2"
-    :loop="true" :coverflowEffect="{
+
+  <swiper  v-if="!isMobileDevice()" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" slidesPerView="auto"
+     :coverflowEffect="{
       rotate: 20,
       stretch: 0,
       depth: 100,
       modifier: 2,
       slideShadows: true,
     }" :pagination="true" :modules="modules" class="mySwiper" :class="class">
-
-    <swiper-slide>
+    <swiper-slide v-for="(item, index) in data">
       <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" 
+          preview-teleported="true" :preview-src-list="[item.resource]"
           :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
+        <div class="btn" @click="onShow" v-if="item.zcjd_flag === 1">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
-      <h3>标题</h3>
+      <h3>{{ item.title }}</h3>
     </swiper-slide>
-    <swiper-slide>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
-          <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
-          <span>政策解读</span>
-          <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
-        </div>
-      </div>
-      <h3>标题</h3>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
-          <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
-          <span>政策解读</span>
-          <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
-        </div>
-      </div>
-      <h3>标题</h3>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
-          <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
-          <span>政策解读</span>
-          <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
-        </div>
-      </div>
-      <h3>标题</h3>
-    </swiper-slide>
-
+  
 
   </swiper>
 
-  <ul class="list" v-if="isMobileDevice()">
-    <li>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
+  <ul class="list" v-if="isMobileDevice()" >
+    <li v-for="(item, index) in data">
+         <div class="pic">
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
+          preview-teleported="true" :preview-src-list="['item.resource']"
           :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
+        <div class="btn" @click="onShow" v-if="item.zcjd_flag === 1">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
-      <h3>标题</h3>
+      <h3>{{ item.title }}</h3>
     </li>
-    <li>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
-          <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
-          <span>政策解读</span>
-          <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
-        </div>
-      </div>
-      <h3>标题</h3>
-    </li>
-    <li>
-      <div class="pic">
-        <el-image src="https://swiperjs.com/demos/images/nature-1.jpg" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-          preview-teleported="true" :preview-src-list="['https://swiperjs.com/demos/images/nature-1.jpg']"
-          :initial-index="4" fit="cover" />
-        <div class="btn" @click="onShow">
-          <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
-          <span>政策解读</span>
-          <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
-        </div>
-      </div>
-      <h3>标题</h3>
-    </li>
+         
   </ul>
   <Policy v-if="type" @back="onHide" />
 </template>

@@ -18,7 +18,10 @@
     }
 }
 
-
+.loading {
+  width: 100%;
+  min-height: 200px;
+}
 @media (max-width:768px) {
   // #app {
   //   min-height: 100vh;

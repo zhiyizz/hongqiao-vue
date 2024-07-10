@@ -21,4 +21,7 @@ declare module 'vue' {
     SwiperList: typeof import('./src/components/SwiperList.vue')['default']
     TabView: typeof import('./src/components/TabView.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

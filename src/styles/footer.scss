@@ -30,7 +30,14 @@
 
         .wx-home {
             display: grid;
-            
+            .ewm {
+              padding:10px;
+              box-sizing: border-box;
+              img {
+                width: 100%;
+              }
+            }
+           
         }
     }
 
