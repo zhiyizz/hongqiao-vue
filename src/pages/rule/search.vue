@@ -51,16 +51,17 @@ loadData()
       flex-wrap: wrap;
       padding:0;
       li {
-        width: 300px;
-        background: #FFFFFF;
-        border: 4px solid #FBDB9E;
-        box-sizing: border-box;
-        background:#fff;
+        width: 290px;
         margin:10px;
        
         .pic {
           background: #fff;
-          height: 300px;
+          background: #FFFFFF;
+          border: 4px solid #FBDB9E;
+          box-sizing: border-box;
+          img {
+            width: 100%;
+          }
         }
         p {
           font-size: 30px;
@@ -77,8 +78,8 @@ loadData()
       ul {
         display:block;
         li {
-          width:100%;
-          margin:10px 0;
+          width:80%;
+          margin:10px auto;
 
         }
       }

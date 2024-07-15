@@ -32,6 +32,12 @@ loadData()
 </template>
 
 <style lang="scss" scoped>
+.jz {
+  max-width: 1000px;
+  img {
+    width: 100%;
+  }
+}
   @media (max-width:768px) {
       .jz {
         padding:0 20px;

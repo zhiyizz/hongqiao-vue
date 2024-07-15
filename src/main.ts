@@ -1,4 +1,4 @@
-import { createApp, onMounted } from 'vue'
+import { createApp } from 'vue'
 import router from './router/router'
 import App from './App.vue'
 import AOS from 'aos';

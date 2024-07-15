@@ -22,7 +22,6 @@ loadData()
 
 <template>
   <Layout class="people people_message" title="人民建议征集全覆盖-建议征集"  :logo="logo">
-  {{ console.log(dataArr) }}
      <div class="message">
         <div class="ewm">
             <img v-for="(item) in dataArr" :src="item.resource" alt="">

@@ -13,7 +13,7 @@ const loading = ref(true)
 
 const  loadData = async() => {
   loading.value = true;
-  const {data} = await getCommon({type:7})
+  const {data} = await getCommon({type:11})
   dataArr.value =  data;
   loading.value = false;
 }
@@ -23,8 +23,7 @@ loadData()
 </script>
 
 <template>
-
-  <Layout class="rule" title="社区普法阵地"  :logo="logo">
+  <Layout class="rule" title="工作掠影"  :logo="logo">
     <div v-loading="loading" class="loading">
       <SwiperList :data="dataArr" />
     </div>

@@ -2,20 +2,30 @@
 import { reactive,ref } from 'vue'
 
 import Layout from '@components/Layout.vue';
-import { getCommon } from '@api/index.ts';
+import { getJdz } from '@api/index.ts';
 const logo = reactive({
     url: "people/logo.png",
     url2x: "people/logo@2x.png"
 })
 const dataArr = ref()
 const loading = ref(true)
+const centerDialogVisible = ref()
 
+
+
+const activeIndex = ref(0)
 
 const  loadData = async() => {
   loading.value = true;
-  const {data} = await getCommon({type:1})
+  // const {data} = await getCommon({type:1})
+  const {data} = await getJdz({})
   dataArr.value =  data;
   loading.value = false;
+}
+
+const onClick = (index:number) => {
+  activeIndex.value = index;
+  centerDialogVisible.value = true;
 }
 loadData()
 
@@ -26,18 +36,32 @@ loadData()
   <Layout class="people" title="金点子结金果子"  :logo="logo">
       <div class="mapTree">
         <div class="ewm">
-            <div class="pic"></div>
+            <div class="pic"><img src="/assets/people/ewm.png" alt=""></div>
             <p>请打开随申办APP扫描上方二维码向虹桥街道提出意见建议</p>
         </div>
           <div class="pos loading" v-loading="loading">
             <img src="/assets/people/tree.png" class="bg" srcset="/assets/people/tree@2x.png 2x" alt=""/> 
             <div class="map">
-              <span v-for="(item) in dataArr">
-                <img :src="item.resource" alt="" />
+              <span v-for="(item,index) in dataArr">
+                <!-- <el-image :src="item.resource" :zoom-rate="1.2"  :max-scale="7" :preview-teleported="true"
+                :preview-src-list="[item.resource]" :initial-index="1" fit="cover" /> -->
+                <el-image   @click="onClick(index)" :src="item.resource" fit="cover" />
+               <!-- <img :src="item.resource" alt="" @click="onClick(index)" />  -->
               </span>
             </div>
           </div>
       </div>
+      <el-dialog v-model="centerDialogVisible"  title=""  align-center
+        append-to-body>
+        <!-- <div class="main" ></div> -->
+        <div class="main" v-html="dataArr[activeIndex].zcjd_content"></div>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
+ 
+          </div>
+        </template>
+      </el-dialog>
   </Layout>
 
 </template>
@@ -53,7 +77,7 @@ loadData()
 
     .ewm {
       width: 210px;
-      height: 280px;
+
       background: rgba(137,93,25,0.5);
       border: 4px solid #FBDB9E;
       position:absolute;
@@ -62,9 +86,10 @@ loadData()
       padding:15px 10px;
       box-sizing: border-box;
       .pic {
-        height: 182px;
-        background:#fff;
         margin-bottom: 5px;
+        img {
+          width: 100%;
+        }
       }
       p {
         margin:0;
@@ -88,6 +113,10 @@ loadData()
           overflow: hidden;
           background:#fff;
           position: absolute;
+          cursor: pointer;
+          :deep(.el-image) {
+            width:100%;
+          }
 
           &.w200 {
             width: 200px;
@@ -159,6 +188,29 @@ loadData()
       }
     }
   }
+
+  .main {
+    text-align: left;
+    
+    :deep(img) {
+      display: block;
+      margin:0 auto 20px;
+    }
+   
+  }
+
+  .close {
+      width: 180px;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      font-size: 30px;
+      color: #FFFFFF;
+      margin:0 auto;
+      cursor: pointer;
+      border:0;
+      
+  }
   @media (max-width:768px) {
     .mapTree {
       position: relative;
@@ -190,6 +242,12 @@ loadData()
             margin-bottom: 20px;
           }
         }
+      }
+    }
+    .main {
+      :deep(img) {
+        width: 100% !important;
+        height: auto !important;
       }
     }
   }

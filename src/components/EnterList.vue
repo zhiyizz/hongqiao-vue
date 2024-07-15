@@ -23,7 +23,7 @@ defineProps<PropsType>()
     <li v-for="(item, index) in data" :data-aos="isMobileDevice() ? '':'fade-left' " :data-aos-duration="index * 500"
       :data-aos-delay="index * 300">
       <RouterLink :to="{ path: item.link }">
-        <img :src="`/assets/` + item.url" alt="" class="bg" :srcset="`/assets/` + item.url2x">
+        <img :src="`/assets/` + item.url" alt="" class="bg" :srcset="`/assets/${item.url2x} 2x`">
         <div class="text">
           <p>{{ item.content }}</p>
           <h3 v-html="item.title"></h3>

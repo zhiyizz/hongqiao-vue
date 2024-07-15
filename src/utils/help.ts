@@ -13,3 +13,11 @@ export function isMobileDevice(strict?: boolean) {
     return window.innerWidth < 768
   }
 }
+
+
+export function openHtml(url:string){
+
+  if(isMobileDevice()) return;
+  const params = 'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=800'
+  window.open(url, '', params)
+}

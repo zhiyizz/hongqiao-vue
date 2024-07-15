@@ -12,21 +12,21 @@ const list = reactive([
         content: "Process mechanism",
         url: "people/pro1.png",
         url2x: "people/pro1@2x.png",
-        link:"/people_process"
+        link:"/people/process"
     },
     {
         title: "站点分布",
         content: "Site distribution",
         url: "people/pro2.png",
         url2x: "people/pro2@2x.png",
-        link:"/people_site"
+        link:"/people/site"
     },
     {
         title: "建议征集",
         content: "Suggested solicitation",
         url: "people/pro3.png",
         url2x: "people/pro3@2x.png",
-        link:"/people_message"
+        link:"/people/message"
     }
 ])
 

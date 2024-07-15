@@ -13,7 +13,7 @@ const loading = ref(true)
 
 const  loadData = async() => {
   loading.value = true;
-  const {data} = await getCommon({type:7})
+  const {data} = await getCommon({type:6})
   dataArr.value =  data;
   loading.value = false;
 }

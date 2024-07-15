@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive,ref,toRaw } from 'vue'
+import { reactive,ref } from 'vue'
 import Layout from '@components/Layout.vue';
 import { getThree } from '@api/index.ts';
 const logo = reactive({
@@ -57,17 +57,17 @@ loadData()
 
 <template>
   <Layout class="rule" title="十分钟法律服务圈" :logo="logo">
-    <div class="three loading" v-loading="loading"  >
+    <div class="three loading" v-loading="loading">
       <div class="item" v-for="item in dataArr">
         <span class="logo" v-if="item.type === '1'">
           <img src="/assets/rule/mj.png" srcset="/assets/rule/mj@2x.png 2x" alt="" />
           <h4>民警</h4>
         </span>
-        <span class="logo"  v-else-if="item.type === '2'">
+        <span class="logo" v-else-if="item.type === '2'">
           <img src="/assets/rule/tjy.png" srcset="/assets/rule/tjy@2x.png 2x" alt="" />
           <h4>调解员</h4>
         </span>
-        <span class="logo"  v-else-if="item.type === '3'">
+        <span class="logo" v-else-if="item.type === '3'">
           <img src="/assets/rule/ls.png" srcset="/assets/rule/ls@2x.png 2x" alt="" />
           <h4>律师</h4>
         </span>
@@ -75,7 +75,7 @@ loadData()
           <div class="scrollbar-item">
             <div class="names">
               <ul>
-               
+
                 <li v-for="item2 in item.users">
                   <h3>{{item2.real_name}}</h3>
                   <p>单位：{{item2.org}}</p>
@@ -84,12 +84,26 @@ loadData()
 
               </ul>
             </div>
-            <div class="copy">
+            <div class="copy" v-if="item.type === '1'">
               <h3>工作职责</h3>
-              <p>1.会同驻所人民调解员全程参与矛盾纠纷调解工作;<br />
-                2.维持调解现场秩序，告知纠纷当事人法律责任，避免过激行为；<br />
-                3.指导做好受案登记、报表统计、文书制作、整理归档等工作；<br />
-                4.根据实际情况，与司法所干部共同将相关矛盾纠纷流转至居委、平安办或相关职能部门</p>
+              <p>1、会同驻所人民调解员全程参与矛盾纠纷调解工作；<br />
+                2、维持调解现场秩序，告知纠纷当事人法律责任，避免过激行为；<br />
+                3、指导做好受案登记、报表统计、文书制作、整理归档等工作；<br />
+                4、根据实际情况，与司法所干部共同将相关矛盾纠纷流转至居委、平安办或相关职能部门</p>
+            </div>
+            <div class="copy" v-else-if="item.type === '2'">
+              <h3>工作职责</h3>
+              <p>1、主持调解工作，讲解有关法律法规和国家政策，在当事人平等协商、互谅互让的基础上提出解决方案，帮助当事人达成调解协议；<br />
+                2、做好受理登记、报表统计、文书制作、信息维护、整理归档等工作；<br />
+                3、提请公安派出所、司法所将相关矛盾纠纷流转至居委、平安办或相关职能部门；<br />
+                4、引导纠纷当事人向人民法院申请司法确认</p>
+            </div>
+            <div class="copy" v-else-if="item.type === '3'">
+              <h3>工作职责</h3>
+              <p>1、开展法治宣传、提高法律咨询、法律建议等公益性法律服务；<br />
+                  2、提请或协调司法所为符合条件的当事人代为申请法律援助服务；<br />
+                  3、制作、出具《法律意见书》；<br />
+                  4、配合做好文书制作和档案整理等工作</p>
             </div>
           </div>
         </el-scrollbar>
@@ -195,6 +209,7 @@ loadData()
       text-align: center;
 
       h4 {
+        font-family: AlibabaPuHuiTi-Bold;
         margin: 10px 0 0;
         font-size: 28px;
         color: #333333;
@@ -209,7 +224,6 @@ loadData()
     }
 
     .names {
-
       ul {
         list-style: none;
         padding: 0;

@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import Layout from '@components/Layout.vue';
 import Copy from '@components/Copy.vue';
-
+import { openHtml,isMobileDevice } from '@utils/help.ts';
 import { getWhhd } from '@api/index.ts';
 const logo = reactive({
   url: "life/logo.png",
@@ -21,6 +21,8 @@ const loadData = async () => {
   loading.value = false;
 }
 loadData()
+
+
 </script>
 
 <template>
@@ -33,9 +35,9 @@ loadData()
           <li class="yellow">
             <div class="left">
               <h3>一网通办</h3>
-              <p>https://zwdt.sh.gov.cn/govPortals/index.do</p>
+              <p >https://zwdt.sh.gov.cn/govPortals/index.do</p>
             </div>
-            <div class="right"><a href="https://zwdt.sh.gov.cn/govPortals/index.do" target="_blank"><img
+            <div class="right"><a @click="openHtml('https://zwdt.sh.gov.cn/govPortals/index.do')" :href="isMobileDevice()?'https://zwdt.sh.gov.cn/govPortals/index.do':'javascript:void(0)'"><img
                   src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt=""> 链接直达</a></div>
           </li>
           <li class="red">
@@ -43,7 +45,7 @@ loadData()
               <h3>上海公共就业招聘新平台</h3>
               <p>https://jobs.rsj.sh.gov.cn/ggzp-shrs/index.html#/</p>
             </div>
-            <div class="right"><a href="https://jobs.rsj.sh.gov.cn/ggzp-shrs/index.html#/" target="_blank"><img
+            <div class="right"><a  @click="openHtml('https://jobs.rsj.sh.gov.cn/ggzp-shrs/index.html#/')" :href="isMobileDevice()?'https://jobs.rsj.sh.gov.cn/ggzp-shrs/index.html#/':'javascript:void(0)'" ><img
                   src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt=""> 链接直达</a></div>
           </li>
           <li class="blue">
@@ -51,13 +53,14 @@ loadData()
               <h3>人社自助经办平台</h3>
               <p>https://zwdtuser.sh.gov.cn/uc/login/login.jsp</p>
             </div>
-            <div class="right"><a href="https://zwdtuser.sh.gov.cn/uc/login/login.jsp" target="_blank"><img
+            <div class="right"  @click="openHtml('https://zwdtuser.sh.gov.cn/uc/login/login.jsp')"><a :href="isMobileDevice()?'https://zwdtuser.sh.gov.cn/uc/login/login.jsp':'javascript:void(0)'" ><img
                   src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt=""> 链接直达</a></div>
           </li>
         </ul>
       </div>
 
     </div>
+    <!-- <Iframe /> -->
   </Layout>
 
 </template>

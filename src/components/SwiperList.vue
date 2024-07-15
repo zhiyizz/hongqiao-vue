@@ -55,7 +55,9 @@ const onSlideChange = (e: { activeIndex: number }) => {
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
-      <h3>{{ item.title }}</h3>
+      <h3 v-if="item?.title">{{ item?.title }}</h3>
+      <h3 v-if="item?.resource_title1">{{ item?.resource_title1 }}</h3>
+      <p v-if="item?.resource_title2">{{ item?.resource_title2 }}</p>
       
       <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
         append-to-body>
@@ -84,7 +86,9 @@ const onSlideChange = (e: { activeIndex: number }) => {
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
         </div>
       </div>
-      <h3>{{ item.title }}</h3>
+      <h3 v-if="item?.title">{{ item?.title }}</h3>
+      <h3 v-if="item?.resource_title1">{{ item?.resource_title1 }}</h3>
+      <p v-if="item?.resource_title2">{{ item?.resource_title2 }}</p>
       
       <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
         append-to-body>
@@ -107,13 +111,7 @@ const onSlideChange = (e: { activeIndex: number }) => {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
-:deep(.el-dialog) {
-    padding:40px  60px !important;
-    background: #fff !important;
-    box-sizing: border-box !important;
-    border-radius: 20px !important;
-    border: 4px solid #FBDB9E !important;
-}
+
 .main {
     text-align: left;
     h3 {
@@ -153,7 +151,6 @@ const onSlideChange = (e: { activeIndex: number }) => {
     background-position: center;
     background-size: cover;
     width: 722px;
-
     position: relative;
 
     &.swiper-slide-active {
@@ -169,7 +166,10 @@ const onSlideChange = (e: { activeIndex: number }) => {
       line-height: 24px;
       display: none;
     }
-
+    p {
+      text-align: center;
+      font-size:18px;
+    }
     .pic {
       position: relative;
 
@@ -286,8 +286,9 @@ const onSlideChange = (e: { activeIndex: number }) => {
     width: 100%;
   
      box-sizing: 0;
-    .swiper-slide {
+    .swiper-slide,li {
       width: auto;
+
     }
   }
   .close {
@@ -303,6 +304,7 @@ const onSlideChange = (e: { activeIndex: number }) => {
       border:0;
 
   }
+
 }
     
 

@@ -23,7 +23,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
- 
+      "@": resolve('src/'),
       "@components": resolve('src/components'), // 路径别名
       "@styles": resolve( 'src/styles'), // 路径别名
       "@assets": resolve('src/assets'), // 路径别名
@@ -41,17 +41,8 @@ export default defineConfig({
       }
     }
   },
-  // server: {
-  //   proxy: {
-  //     '/net': {
-  //       target: 'http://api.gbhqsf.com/admin/getdata',
-  //       changeOrigin: true,
-  //       // rewrite: path => ''
-  //       rewrite: path => path.replace(/^\/net/, '')
-  //     }
-  //   },
-  //   host: '0.0.0.0'
-  // },
+  // base:'/hongqiao/',
+
 
 
 })

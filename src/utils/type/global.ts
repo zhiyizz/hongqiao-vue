@@ -18,8 +18,10 @@ type wlfwType = {
 type whhdDetailType = {
     id: number,
     cate_name: string, //页面名称
-    title: string, //图片标题
+    title?: string, //图片标题
     resource: string //图片地址
+    resource_title1?:string
+    resource_title2?:string
 }[]
 
 
