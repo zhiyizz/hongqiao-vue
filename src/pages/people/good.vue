@@ -32,36 +32,39 @@ loadData()
 </script>
 
 <template>
-  {{ console.log(dataArr) }}
-  <Layout class="people" title="金点子结金果子"  :logo="logo">
-      <div class="mapTree">
-        <div class="ewm">
-            <div class="pic"><img src="/assets/people/ewm.png" alt=""></div>
-            <p>请打开随申办APP扫描上方二维码向虹桥街道提出意见建议</p>
-        </div>
-          <div class="pos loading" v-loading="loading">
-            <img src="/assets/people/tree.png" class="bg" srcset="/assets/people/tree@2x.png 2x" alt=""/> 
-            <div class="map">
-              <span v-for="(item,index) in dataArr">
-                <!-- <el-image :src="item.resource" :zoom-rate="1.2"  :max-scale="7" :preview-teleported="true"
-                :preview-src-list="[item.resource]" :initial-index="1" fit="cover" /> -->
-                <el-image   @click="onClick(index)" :src="item.resource" fit="cover" />
-               <!-- <img :src="item.resource" alt="" @click="onClick(index)" />  -->
-              </span>
-            </div>
-          </div>
+  <Layout class="people" title="金点子结金果子" :logo="logo">
+    <div class="mapTree">
+      <div class="ewm">
+        <div class="pic"><img src="/assets/people/ewm.png" alt=""></div>
+        <p>请打开随申办APP扫描上方二维码向虹桥街道提出意见建议</p>
       </div>
-      <el-dialog v-model="centerDialogVisible"  title=""  align-center
-        append-to-body>
-        <!-- <div class="main" ></div> -->
-        <div class="main" v-html="dataArr[activeIndex].zcjd_content"></div>
-        <template #footer>
-          <div class="dialog-footer">
-            <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
+      <div class="pos loading" v-loading="loading">
+        <img src="/assets/people/tree.png" class="bg" srcset="/assets/people/tree@2x.png 2x" alt="" />
+        <div class="map">
+          <span v-for="(item,index) in dataArr">
+            <!-- <el-image :src="item.resource" :zoom-rate="1.2"  :max-scale="7" :preview-teleported="true"
+                :preview-src-list="[item.resource]" :initial-index="1" fit="cover" /> -->
+            <el-image @click="onClick(index)" hide-on-click-modal :src="item.resource" fit="cover" />
+            <!-- <img :src="item.resource" alt="" @click="onClick(index)" />  -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <el-dialog custom-class="dialog" v-model="centerDialogVisible"  lock-scroll close-on-click-modal align-center append-to-body>
+      <!-- <div class="main" ></div> -->
+      <el-scrollbar class="scroll-main" >
+        <div class="scrollbar-flex-content">
+          <div class="main" v-html="dataArr[activeIndex].zcjd_content"></div>
+        </div>
+      </el-scrollbar>
+
+      <template #footer @click="centerDialogVisible = false">
+        <!-- <div class="dialog-footer">
+            <el-button class="close">关闭</el-button>
  
-          </div>
-        </template>
-      </el-dialog>
+          </div> -->
+      </template>
+    </el-dialog>
   </Layout>
 
 </template>
@@ -82,7 +85,7 @@ loadData()
       border: 4px solid #FBDB9E;
       position:absolute;
       left:70px;
-      top:0;
+      bottom:200px;
       padding:15px 10px;
       box-sizing: border-box;
       .pic {
@@ -198,7 +201,9 @@ loadData()
     }
    
   }
-
+  .scroll-main {
+    height: 800px;
+  }
   .close {
       width: 180px;
       height: 70px;
@@ -211,6 +216,7 @@ loadData()
       border:0;
       
   }
+
   @media (max-width:768px) {
     .mapTree {
       position: relative;
@@ -220,6 +226,7 @@ loadData()
         position: relative;
         margin:0 auto;
         left:0;
+        bottom: 0;
       }
       .pos {
         width:100%;
@@ -244,7 +251,12 @@ loadData()
         }
       }
     }
+    .scroll-main {
+      height: 72vh;
+      margin-top:-40px;
+    }
     .main {
+     
       :deep(img) {
         width: 100% !important;
         height: auto !important;

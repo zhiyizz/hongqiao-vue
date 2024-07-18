@@ -25,13 +25,18 @@ const onHide = (val: boolean) => {
 
 defineProps<{
   class?: string
-  data:typeof SwiperType
+  data: typeof SwiperType
 }>()
 
 const onSlideChange = (e: { activeIndex: number }) => {
-    console.log(e)
-    activeIndex.value = e.activeIndex
-  }
+  console.log(e)
+  activeIndex.value = e.activeIndex
+}
+
+const onClick = (index: number) => {
+  activeIndex.value = index;
+  centerDialogVisible.value = true;
+}
 </script>
 
 
@@ -47,9 +52,9 @@ const onSlideChange = (e: { activeIndex: number }) => {
     }" :pagination="true" :modules="modules" class="mySwiper" :class="class" @slideChange="onSlideChange">
     <swiper-slide v-for="(item, index) in data">
       <div class="pic">
-        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :preview-teleported="true"
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7"  hide-on-click-modal   :preview-teleported="true"
           :preview-src-list="[item.resource]" :initial-index="1" fit="cover" />
-        <div class="btn" @click="centerDialogVisible = true" v-if="item.zcjd_flag === 1 && activeIndex === index">
+        <div class="btn" @click="onClick(index)"  v-if="item.zcjd_flag === 1 ">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
@@ -58,29 +63,33 @@ const onSlideChange = (e: { activeIndex: number }) => {
       <h3 v-if="item?.title">{{ item?.title }}</h3>
       <h3 v-if="item?.resource_title1">{{ item?.resource_title1 }}</h3>
       <p v-if="item?.resource_title2">{{ item?.resource_title2 }}</p>
-      
-      <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
-        append-to-body>
-        <div class="main" v-html="item.zcjd_content"></div>
-        <template #footer>
-          <div class="dialog-footer">
-            <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
- 
-          </div>
-        </template>
-      </el-dialog>
 
     </swiper-slide>
 
-
   </swiper>
+
+  <el-dialog v-model="centerDialogVisible" lock-scroll close-on-click-modal title="政策解读" align-center append-to-body>
+
+    <el-scrollbar class="scroll-main">
+      <div class="scrollbar-flex-content">
+        <div class="main" v-html="data[activeIndex].zcjd_content"></div>
+      </div>
+    </el-scrollbar>
+
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
+
+      </div>
+    </template>
+  </el-dialog>
 
   <ul class="list" v-if="isMobileDevice()">
     <li v-for="(item, index) in data">
       <div class="pic">
-        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" :preview-teleported="true"
+        <el-image :src="item.resource" :zoom-rate="1.2" :max-scale="7" hide-on-click-modal  :preview-teleported="true"
           :preview-src-list="[item.resource]" :initial-index="1" fit="cover" />
-        <div class="btn" @click="centerDialogVisible = true" v-if="item.zcjd_flag === 1 && activeIndex === index">
+        <div class="btn" @click="onClick(index)"  v-if="item.zcjd_flag === 1 ">
           <img src="/assets/life/book.png" srcset="/assets/life/book@2x.png 2x" alt="">
           <span>政策解读</span>
           <img src="/assets/life/arrow_right.png" srcset="/assets/life/arrow_right@2x.png 2x" alt="">
@@ -89,17 +98,22 @@ const onSlideChange = (e: { activeIndex: number }) => {
       <h3 v-if="item?.title">{{ item?.title }}</h3>
       <h3 v-if="item?.resource_title1">{{ item?.resource_title1 }}</h3>
       <p v-if="item?.resource_title2">{{ item?.resource_title2 }}</p>
-      
-      <el-dialog v-model="centerDialogVisible" v-if="activeIndex === index" title="政策解读"  align-center
+
+      <!-- <el-dialog v-model="centerDialogVisible" lock-scroll close-on-click-modal v-if="activeIndex === index" title="政策解读"  align-center
         append-to-body>
-        <div class="main" v-html="item.zcjd_content"></div>
+        <el-scrollbar class="scroll-main" >
+          <div class="scrollbar-flex-content">
+          <div class="main" v-html="item.zcjd_content"></div>
+        </div>
+      </el-scrollbar>
+       
         <template #footer>
           <div class="dialog-footer">
             <el-button class="close" @click="centerDialogVisible = false">关闭</el-button>
  
           </div>
         </template>
-      </el-dialog>
+      </el-dialog> -->
     </li>
 
   </ul>
@@ -113,30 +127,35 @@ const onSlideChange = (e: { activeIndex: number }) => {
 
 
 .main {
-    text-align: left;
-    h3 {
-      text-align: center;
-      font-family: SourceHanSerifCN-Bold;
-      font-weight: bold;
-      font-size: 40px;
-      color: #333333;
-      margin: 0;
+  text-align: left;
 
-    }
-  }
-  .close {
-      width: 180px;
-      height: 70px;
-      line-height: 70px;
-      text-align: center;
-      font-size: 30px;
-      color: #FFFFFF;
-      margin:0 auto;
-      cursor: pointer;
-      border:0;
-      
-  }
+  h3 {
+    text-align: center;
+    font-family: SourceHanSerifCN-Bold;
+    font-weight: bold;
+    font-size: 40px;
+    color: #333333;
+    margin: 0;
 
+  }
+}
+
+.close {
+  width: 180px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 30px;
+  color: #FFFFFF;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 0;
+
+}
+
+.scroll-main {
+  height: 600px;
+}
 
 .mySwiper {
   width: 1200px;
@@ -152,7 +171,7 @@ const onSlideChange = (e: { activeIndex: number }) => {
     background-size: cover;
     width: 722px;
     position: relative;
-
+    
     &.swiper-slide-active {
       h3 {
         display: block;
@@ -166,10 +185,12 @@ const onSlideChange = (e: { activeIndex: number }) => {
       line-height: 24px;
       display: none;
     }
+
     p {
       text-align: center;
-      font-size:18px;
+      font-size: 18px;
     }
+
     .pic {
       position: relative;
 
@@ -197,7 +218,7 @@ const onSlideChange = (e: { activeIndex: number }) => {
         img {
           width: auto;
         }
-       
+
       }
 
       .el-image {
@@ -229,17 +250,19 @@ const onSlideChange = (e: { activeIndex: number }) => {
   list-style: none;
   padding: 0;
   width: 100%;
-  padding:0 20px;
+  padding: 0 20px;
   box-sizing: border-box;
+
   li {
     margin: 0 0 20px;
     position: relative;
     overflow: hidden;
-    
+
     h3 {
-        text-align: center;
-        font-size: 18px;
-      }
+      text-align: center;
+      font-size: 18px;
+    }
+
     .pic {
       position: relative;
 
@@ -247,7 +270,7 @@ const onSlideChange = (e: { activeIndex: number }) => {
         width: 100%;
         float: left;
       }
-    
+
       .btn {
         position: absolute;
         right: 0;
@@ -284,29 +307,33 @@ const onSlideChange = (e: { activeIndex: number }) => {
 @media (max-width:768px) {
   .mySwiper {
     width: 100%;
-  
-     box-sizing: 0;
-    .swiper-slide,li {
+
+    box-sizing: 0;
+
+    .swiper-slide,
+    li {
       width: auto;
 
     }
   }
+
   .close {
-      width: 100px;
-      height:40px;
-      line-height: 40px;
-      text-align: center;
-    
-      font-size: 18px;
-      color: #FFFFFF;
-      margin:0 auto;
-      cursor: pointer;
-      border:0;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+
+    font-size: 18px;
+    color: #FFFFFF;
+    margin: 0 auto;
+    cursor: pointer;
+    border: 0;
 
   }
 
+  .scroll-main {
+    height: 55vh;
+
+  }
 }
-    
-
-
 </style>

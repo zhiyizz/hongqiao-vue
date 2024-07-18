@@ -54,11 +54,11 @@ defineProps<{
         <div class="rule_search" v-if="$route.path === '/rule/search'">
             <div class="link yellow"  >
                <p>国际社区法律<br />事务指引电子书</p>
-               <a  @click="openHtml('https://book.yunzhan365.com/ermcp/xmgr/mobile/index.html')" :href="isMobileDevice()?'https://book.yunzhan365.com/ermcp/xmgr/mobile/index.html':'javascript:void(0)'"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+               <a  @click="openHtml('https://h2.veqxiu.net/e/3541032')" :href="isMobileDevice()?'https://h2.veqxiu.net/e/3541032':'javascript:void(0)'"><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             </div>
             <div class="link red">
                <p>涉外公证</p>
-               <a @click="openHtml('https://book.yunzhan365.com/ermcp/ybco/mobile/index.html')" :href="isMobileDevice()?'https://book.yunzhan365.com/ermcp/ybco/mobile/index.html':'javascript:void(0)'" ><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
+               <a @click="openHtml('https://h2.veqxiu.net/e/3541086')" :href="isMobileDevice()?'https://h2.veqxiu.net/e/3541086':'javascript:void(0)'" ><img src="/assets/life/link.png" srcset="/assets/life/link@2x.png 2x" alt="">链接直达</a>
             
             </div>
         </div>

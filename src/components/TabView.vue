@@ -51,6 +51,7 @@ const loading = computed(()=>{
             background: url('/assets/btn.png') no-repeat;
             background-size: 100% 100%;
             text-align: center;
+            cursor:pointer;
             @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
               background: url('/assets/btn@2x.png') no-repeat;
               background-size: 100% 100%;

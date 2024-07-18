@@ -12,8 +12,7 @@
 </script>
 
 <template>
-    <div class="header" :class="class">
-        {{ console.log($route.path) }}
+    <div class="header" :class="class" @click="() => console.log(isMobileDevice())">
         <div class="logo" v-if="!(isMobileDevice() && $route.path !== '/')">
             <img src="/assets/logo.png" alt="" srcset="/assets/logo@2x.png 2x" />
         </div>

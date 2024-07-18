@@ -12,7 +12,6 @@ const props = defineProps<{
 
 
 <template>
-  {{ console.log(props.data) }}
   <div class="tab-body">
     <Copy :title="props.data?.page_content?.cate_name??''" :content="props.data.page_content?.detail??''" />
     <div class="pic">
